@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\IWAGenerator"
+    "\\IWAGenerator",
+    "\\IWAGenerator\\src\\app"
   ],
-  "SelectedNode": "\\IWAGenerator\\logfile.log",
+  "SelectedNode": "\\IWAGenerator\\src",
   "PreviewInSolutionExplorer": false
 }
