@@ -36,9 +36,9 @@ public class Application
 		this.settings = new Settings(new SettingsFile(getLocalFile("settings.conf")));
 		this.stationSelection = new StationSelection();
 		instance = this;
-		boolean logging = getInstance().getSettings().loggingEnabled();
-		this.dataLoader = getInstance().initDataLoader(logging);	
-		this.generator = getInstance().initGenerator(logging);
+		boolean logging = this.getSettings().loggingEnabled();
+		this.dataLoader = this.initDataLoader(logging);	
+		this.generator = this.initGenerator(logging);
 		this.generatorGui = new GeneratorGUI((IGenerator)this.generator);
 	}
 
@@ -111,11 +111,9 @@ public class Application
 		return this.generatorGui;
 	}
 
-	public File getLocalFile(String filename) {
-		return new File(this.path, filename);
-	}
-
-	public static void main(String[] args) {
-		getInstance();
+	public static File getLocalFile(String filename) {
+		File file = new File(System.getProperty("user.dir"),File.separator + "IWAGenerator" + File.separator + filename);
+		System.out.println("Looking for file at: " + file.getAbsolutePath());  // Debugging
+    	return file;
 	}
 }

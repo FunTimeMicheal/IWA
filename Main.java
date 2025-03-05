@@ -1,3 +1,5 @@
+import app.Application;
+
 // first version of the Main
 class Main
 {
@@ -8,8 +10,7 @@ class Main
     }
 
 
-    public static void Main()
-    {
-
-    }
+    public static void main(String[] args) {
+		Application.getInstance();
+	}
 }
