@@ -27,6 +27,15 @@
                         <div>
                             <input type="password" placeholder="Password" id="login-password">
                         </div>
+                        <div class="login-options">
+                            <div class="login-show-password">
+                                <input id="show-password" type="checkbox" onclick="showPassword()" checked="">
+                                <label for="show-password">Show Password</label>
+                            </div>
+                            <div>
+                                <a href="#" class="forgot-passwprd">Forgot password?</a>
+                            </div>
+                        </div>
                         <div class="login-submit-button">
                              <button type="submit">Submit</button>
                         </div>
