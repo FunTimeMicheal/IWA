@@ -3,11 +3,19 @@
     "type": "project",
     "require": {
         "slim/slim": "^4.14",
-        "slim/psr7": "^1.7"
+        "slim/psr7": "^1.7",
+        "doctrine/orm": "^3.3",
+        "doctrine/dbal": "^4.2",
+        "symfony/cache": "^7.2"
     },
     "autoload": {
         "psr-4": {
             "Iwa\\Application\\": "src/"
         }
+    },
+    "scripts": {
+        "update-db": "@php src/database/doctrine.php orm:schema-tool:update",
+        "force-db": "@update-db --force",
+        "test": "@php -S localhost:8000 -t public"
     }
 }
