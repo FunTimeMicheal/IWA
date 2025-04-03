@@ -1,5 +1,6 @@
 package util;
 
+import app.Application;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class StationSelection {
     }
 
     private void readList() {
-        try (BufferedReader infile = new BufferedReader(new FileReader("selected_stations.txt"))) {
+        try (BufferedReader infile = new BufferedReader(new FileReader(Application.getLocalFile("selected_stations.txt")))) {
             String line = null;
             while ((line = infile.readLine()) != null) {
                 String value = line.trim();
