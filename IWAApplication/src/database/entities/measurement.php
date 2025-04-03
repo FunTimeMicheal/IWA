@@ -5,11 +5,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'measurements')]
 class Measurement {
     #[ORM\Id]
-    #[ORM\Column(type:'bigint')]
+    #[ORM\Column(type:'integer')]
     #[ORM\GeneratedValue]
-    private int $measurementID;
-    #[ORM\ManyToOne(targetEntity: Station::class)]
+    private int $id;
+
+    #[ORM\ManyToOne(targetEntity: Station::class, inversedBy: 'measurements')]
     private Station|null $station;
+
     #[ORM\Column(type:'datetime')]
     private DateTime $date_time;
     #[ORM\Column(type:'float')]
@@ -30,7 +32,7 @@ class Measurement {
     private float $percipation;
     #[ORM\Column(type:'float')]
     private float $snow_depth;
-    #[ORM\Column(type:'varchar')]
+    #[ORM\Column(type:'string')]
     private string $conditions;
     #[ORM\Column(type:'float')]
     private float $cloud_cover;
@@ -38,8 +40,6 @@ class Measurement {
     private int $wind_direction;
     #[ORM\Column(type:'integer')]
     private int $missing_fields;
-
-
 
     public function __construct(Station $station, DateTime $date_time, float $temperature, float $invalid_temerature, float $dewpoint_temperature, float $air_pressure_station, float $air_pressure_sea_level, float $visibility, float $wind_speed, float $percipation, float $snow_depth, string $conditions, float $cloud_cover, int $wind_direction, int $missing_fields ) {
         $this->station = $station;

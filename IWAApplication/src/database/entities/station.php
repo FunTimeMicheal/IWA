@@ -1,6 +1,9 @@
 <?php
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 #[ORM\Entity]
 #[ORM\Table(name: 'stations')]
 class Station
@@ -8,25 +11,29 @@ class Station
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private int|null $stationID;
+    private int|null $id;
 
     #[ORM\Column(type: 'string')]
     private string $name;
 
     #[ORM\Column(type: 'float')]
-    private string $longitude;
+    private float $longitude;
 
     #[ORM\Column(type: 'float')]
-    private string $latitude;
+    private float $latitude;
 
     #[ORM\Column(type: 'float')]
-    private string $elevation;
+    private float $elevation;
+
+    #[ORM\OneToMany(targetEntity: Measurement::class, mappedBy: 'station')]
+    private Collection $measurements;
 
     public function __construct(string $name, float $longitude, float $latitude, float $elevation) {
         $this->name = $name;
         $this->longitude = $longitude;
         $this->latitude = $latitude;
         $this->elevation = $elevation;
+        $this->measurements = new ArrayCollection();
     }
 
     public function getName() {
