@@ -1,20 +1,12 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use IWA\Application\Routes\ViewsController;
 
-require __DIR__ . '/../vendor/autoload.php';
+chdir(__DIR__ . "/..");
+require getcwd() . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
-
-$app->get('/leaf', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello Leaf!");
-    return $response;
-});
+$app->group('', new ViewsController());
 
 $app->run();

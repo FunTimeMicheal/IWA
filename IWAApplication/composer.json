@@ -6,11 +6,12 @@
         "slim/psr7": "^1.7",
         "doctrine/orm": "^3.3",
         "doctrine/dbal": "^4.2",
-        "symfony/cache": "^7.2"
+        "symfony/cache": "^7.2",
+        "slim/php-view": "^3.4"
     },
     "autoload": {
         "psr-4": {
-            "Iwa\\Application\\": "src/"
+            "IWA\\Application\\": "src/"
         }
     },
     "scripts": {
