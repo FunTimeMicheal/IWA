@@ -1,4 +1,6 @@
 <?php
+namespace IWA\Application\Database\Entities;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -17,7 +19,7 @@ class Measurement {
     #[ORM\Column(type:'float')]
     private float $temperature;
     #[ORM\Column(type:'float')]
-    private float $invalid_temerature;
+    private float $invalid_temperature;
     #[ORM\Column(type:'float')]
     private float $dewpoint_temperature;
     #[ORM\Column(type:'float')]
@@ -41,11 +43,11 @@ class Measurement {
     #[ORM\Column(type:'integer')]
     private int $missing_fields;
 
-    public function __construct(Station $station, DateTime $date_time, float $temperature, float $invalid_temerature, float $dewpoint_temperature, float $air_pressure_station, float $air_pressure_sea_level, float $visibility, float $wind_speed, float $percipation, float $snow_depth, string $conditions, float $cloud_cover, int $wind_direction, int $missing_fields ) {
+    public function __construct(Station $station, DateTime $date_time, float $temperature, float $invalid_temperature, float $dewpoint_temperature, float $air_pressure_station, float $air_pressure_sea_level, float $visibility, float $wind_speed, float $percipation, float $snow_depth, string $conditions, float $cloud_cover, int $wind_direction, int $missing_fields ) {
         $this->station = $station;
         $this->date_time = $date_time;
         $this->temperature = $temperature;
-        $this->invalid_temerature = $invalid_temerature;
+        $this->invalid_temperature = $invalid_temperature;
         $this->dewpoint_temperature = $dewpoint_temperature;
         $this->air_pressure_station = $air_pressure_station;
         $this->air_pressure_sea_level = $air_pressure_sea_level;
@@ -61,5 +63,14 @@ class Measurement {
     public function setStation(Station $station): void
     {
         $this->station= $station;
+    }
+
+    public function get_ID(): int
+    {
+        return $this->id;
+    }
+    public function get_station(): Station
+    {
+        return $this->station;
     }
 }

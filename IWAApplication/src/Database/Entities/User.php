@@ -1,8 +1,7 @@
 <?php
-use Doctrine\ORM\Mapping as ORM;
+namespace IWA\Application\Database\Entities;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]

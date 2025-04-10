@@ -1,6 +1,7 @@
 <?php
-use Doctrine\ORM\Mapping as ORM;
+namespace IWA\Application\Database\Entities;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -13,8 +14,8 @@ class Company {
     #[ORM\GeneratedValue]
     private int $id;
 
-    #[ORM\ManyToOne(targetEntity: Country::class, inversedBy: 'companies')]
-    private Country|null $country = null;
+    #[ORM\ManyToOne(targetEntity: Geolocation::class, inversedBy: 'companies')]
+    private Country|null $location = null;
 
     //subscriptions
 
@@ -23,9 +24,6 @@ class Company {
 
     #[ORM\Column(type:'string')]
     private string $name;
-
-    #[ORM\Column(type:'string')]
-    private string $city;
 
     #[ORM\Column(type:'string')]
     private string $street;

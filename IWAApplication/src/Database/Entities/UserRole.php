@@ -1,6 +1,7 @@
 <?php
-use Doctrine\ORM\Mapping as ORM;
+namespace IWA\Application\Database\Entities;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

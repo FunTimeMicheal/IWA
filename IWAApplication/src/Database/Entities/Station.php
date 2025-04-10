@@ -1,6 +1,7 @@
 <?php
-use Doctrine\ORM\Mapping as ORM;
+namespace IWA\Application\Database\Entities;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -27,6 +28,10 @@ class Station
 
     #[ORM\OneToMany(targetEntity: Measurement::class, mappedBy: 'station')]
     private Collection $measurements;
+
+    #[ORM\ManyToOne(targetEntity: Geolocation::class, inversedBy: 'stations')]
+    private Geolocation|null $nearest_location;
+
 
     public function __construct(string $name, float $longitude, float $latitude, float $elevation) {
         $this->name = $name;
