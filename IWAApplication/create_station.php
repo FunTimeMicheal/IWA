@@ -1,4 +1,6 @@
 <?php
+
+use IWA\Application\Database\Entities\Station;
 $entityManager = require_once getcwd() . '/src/Database/bootstrap.php';
 
 $name = $argv[1];

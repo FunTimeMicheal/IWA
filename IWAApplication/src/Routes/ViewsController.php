@@ -9,7 +9,7 @@ use Slim\Views\PhpRenderer;
 class ViewsController {
   public function __invoke(RouteCollectorProxy $group) {
     $group->get("/", function (Request $request, Response $response, array $args) {
-      $renderer = new PhpRenderer(getcwd() . "/src/views");
+      $renderer = new PhpRenderer(getcwd() . "/src/Views");
       return $renderer->render($response, "index.php");
     });
   }

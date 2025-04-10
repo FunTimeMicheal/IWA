@@ -1,4 +1,6 @@
 <?php
+
+use IWA\Application\Database\Entities\Measurement;
 $entityManager = require_once "../bootstrap.php";
 
 $station = $argv[1];
@@ -21,7 +23,7 @@ $cloud_cover = $argv[13];
 $wind_direction = $argv[14];
 $missing_fields = $argv[15];
 
-$measurement = new measurement(
+$measurement = new Measurement(
     $station,
     $date_time,
     $temperature,

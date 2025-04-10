@@ -1,4 +1,6 @@
 <?php
+namespace IWA\Application\Database\Entities;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
