@@ -69,4 +69,8 @@ class Measurement {
     {
         return $this->id;
     }
+    public function get_station(): Station
+    {
+        return $this->station;
+    }
 }

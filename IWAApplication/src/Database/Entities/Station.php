@@ -29,6 +29,10 @@ class Station
     #[ORM\OneToMany(targetEntity: Measurement::class, mappedBy: 'station')]
     private Collection $measurements;
 
+    #[ORM\ManyToOne(targetEntity: Geolocation::class, inversedBy: 'stations')]
+    private Geolocation|null $nearest_location;
+
+
     public function __construct(string $name, float $longitude, float $latitude, float $elevation) {
         $this->name = $name;
         $this->longitude = $longitude;
