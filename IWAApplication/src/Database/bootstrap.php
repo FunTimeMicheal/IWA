@@ -6,7 +6,7 @@ use Doctrine\ORM\ORMSetup;
 require_once "vendor/autoload.php";
 
 $config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: [getcwd() . '/src/database/entities'],
+    paths: [getcwd() . '/src/Database/Entities'],
     isDevMode: true,
 );
 
@@ -17,3 +17,4 @@ $connection = DriverManager::getConnection([
 
 // obtaining the entity manager
 $entityManager = new EntityManager($connection, $config);
+return $entityManager;

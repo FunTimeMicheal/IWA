@@ -21,7 +21,7 @@ while(true)
         $windSpeed = $parsedData['WIND'] ?? null;
         $humidity = $parsedData['HUM'] ?? null;
         
-        echo "Data opgeslagen in database.\n";
+        echo "Data opgeslagen in Database.\n";
     }
     
     sleep(1); 
