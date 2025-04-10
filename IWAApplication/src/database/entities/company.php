@@ -18,6 +18,9 @@ class Company {
 
     //subscriptions
 
+    #[ORM\OneToMany(targetEntity: Relation::class, mappedBy: 'company')]
+    private Collection $relations;
+
     #[ORM\Column(type:'string')]
     private string $name;
 
@@ -47,7 +50,6 @@ class Company {
         $this->nummer_additional  = $nummer_additional;
         $this->zip_code  = $zip_code;
         $this->email  = $email;
-
+        $this->relations = new ArrayCollection();
     }
-
 }
