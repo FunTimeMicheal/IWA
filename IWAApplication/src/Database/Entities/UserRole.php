@@ -4,13 +4,13 @@ namespace IWA\Application\Database\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use IWA\Application\Lib\Traits\FromArray;
+use IWA\Application\Lib\Traits\Entity;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'userroles')]
 
 class UserRole {
-    use FromArray;
+    use Entity;
     
     #[ORM\Id]
     #[ORM\Column(type:'integer')]

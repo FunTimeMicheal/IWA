@@ -2,13 +2,13 @@
 namespace IWA\Application\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use IWA\Application\Lib\Traits\FromArray;
+use IWA\Application\Lib\Traits\Entity;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
 
 class User {
-    use FromArray;
+    use Entity;
     
     #[ORM\Id]
     #[ORM\Column(type:'integer')]

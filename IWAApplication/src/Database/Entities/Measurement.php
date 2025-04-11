@@ -3,12 +3,12 @@ namespace IWA\Application\Database\Entities;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use IWA\Application\Lib\Traits\FromArray;
+use IWA\Application\Lib\Traits\Entity;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'measurements')]
 class Measurement {
-    use FromArray;
+    use Entity;
 
     #[ORM\Id]
     #[ORM\Column(type:'integer')]

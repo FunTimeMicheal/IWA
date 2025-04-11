@@ -4,13 +4,14 @@ namespace IWA\Application\Database\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use IWA\Application\Lib\Traits\FromArray;
+use IWA\Application\Lib\Traits\Entity;
+use JsonSerializable;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'stations')]
-class Station
+class Station implements JsonSerializable
 {
-    use FromArray;
+    use Entity;
     
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
@@ -58,5 +59,12 @@ class Station
 
     public function getElevation() {
         return $this->elevation;
+    }
+
+    public function jsonSerialize() {
+        $data = get_object_vars($this);
+        $data["nearest_location"] = $data["nearest_location"]["id"];
+        unset($data["measurements"]);
+        return $data;
     }
 }
