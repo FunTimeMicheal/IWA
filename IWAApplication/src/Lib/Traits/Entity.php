@@ -13,8 +13,7 @@ trait Entity {
    public function patch(array $data = []) {
     foreach (get_object_vars($this) as $property => $default) {
       if (!array_key_exists($property, $data)) continue;
-      $obj->{$property} = $data[$property];
+      $this->{$property} = $data[$property];
     }
-    return $obj;
    }
  }
