@@ -44,7 +44,5 @@ class User {
         $this->email  = $email;
         $this->employee_code  = $employee_code;
         $this->password  = $password;
-
     }
-
 }
