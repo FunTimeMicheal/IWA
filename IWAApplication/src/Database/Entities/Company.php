@@ -43,9 +43,8 @@ class Company {
     #[ORM\Column(type:'string')]
     private string $email;
 
-    public function __construct(string $name, string $city, string $street, int $number, string $nummer_additional, string $zip_code, string $email) {
+    public function __construct(string $name, string $street, int $number, string $nummer_additional, string $zip_code, string $email) {
         $this->name  = $name;
-        $this->city  = $city;
         $this->street  = $street;
         $this->number  = $number;
         $this->nummer_additional  = $nummer_additional;
