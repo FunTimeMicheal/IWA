@@ -1,11 +1,15 @@
 <?php
 namespace IWA\Application\Database\Entities;
+
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use IWA\Application\Lib\Traits\FromArray;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'measurements')]
 class Measurement {
+    use FromArray;
+
     #[ORM\Id]
     #[ORM\Column(type:'integer')]
     #[ORM\GeneratedValue]

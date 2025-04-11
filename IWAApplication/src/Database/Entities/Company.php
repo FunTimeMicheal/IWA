@@ -4,11 +4,14 @@ namespace IWA\Application\Database\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use IWA\Application\Lib\Traits\FromArray;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'companies')]
 
 class Company {
+    use FromArray;
+
     #[ORM\Id]
     #[ORM\Column(type:'integer')]
     #[ORM\GeneratedValue]
