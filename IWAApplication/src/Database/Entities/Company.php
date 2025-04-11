@@ -15,7 +15,7 @@ class Company {
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: Geolocation::class, inversedBy: 'companies')]
-    private Country|null $location = null;
+    private Geolocation|null $location = null;
 
     //subscriptions
 
