@@ -1,68 +1,67 @@
 <?php
+namespace IWA\Application\Database;
+
+use IWA\Application\Lib\Queue;
+
 class DataLogger
 {
-
-    function processWeatherData($data) {
-        $invalid_temperature = null;
-        $weatherByStation = [];
-        $TemperatureAVG = [];
-        $correctieStation = [];
-        $TemperatureQueue = [];
-        $DewPointQueue = [];
-        $AirpressureStationQueue = [];
-        $AirpressureSeaQueue = [];
-        $VisibilityQueue = [];
-        $WindSpeedQueue = [];
-        $PercipitationQueue = [];
-        $SnowDepthQueue = [];
-        $ConditionsQueueu = [];
-        $CloudCoverQueueu = [];
-        $WindDirectionQueue = [];
+    $invalid_temperature = null;
+    $weatherByStation = [];
+    $TemperatureAVG = [];
+    $correctieStation = [];
+    $TemperatureQueue = [];
+    $DewPointQueue = [];
+    $AirpressureStationQueue = [];
+    $AirpressureSeaQueue = [];
+    $VisibilityQueue = [];
+    $WindSpeedQueue = [];
+    $PercipitationQueue = [];
+    $SnowDepthQueue = [];
+    $ConditionsQueueu = [];
+    $CloudCoverQueueu = [];
+    $WindDirectionQueue = [];
 
     
 
+    function processWeatherData($data) {
         if (isset($data['WEATHERDATA']) && is_array($data['WEATHERDATA'])) {
             foreach ($data['WEATHERDATA'] as $meting) {
                 $station = $meting['STN'];
+                
+                $stationTemperatureQueue = $TemperatureQueue[$station] ?? $TemperatureQueue[$station] = new Queue();
+                $stationTemperatureQueue->enqueue();
 
-                if (count($TemperatureQueue[$station]) > 30) {
-                    array_shift($TemperatureQueue[$station]);
-                }
-                if (count($DewPointQueue[$station]) > 30) {
-                    array_shift($DewPointQueue[$station]);
-                }
-                if (count($AirpressureStationQueue[$station]) > 30) {
-                    array_shift($AirpressureStationQueue[$station]);
-                }
-                if (count($AirpressureSeaQueue[$station]) > 30) {
-                    array_shift($AirpressureSeaQueue[$station]);
-                }
-                if (count($VisibilityQueue[$station]) > 30) {
-                    array_shift($VisibilityQueue[$station]);
-                }
-                if (count($WindSpeedQueue[$station]) > 30) {
-                    array_shift($WindSpeedQueue[$station]);
-                }
-                if (count($PercipitationQueue[$station]) > 30) {
-                    array_shift($PercipitationQueue[$station]);
-                }
-                if (count($SnowDepthQueue[$station]) > 30) {
-                    array_shift($SnowDepthQueue[$station]);
-                }
-                if (count($ConditionsQueueu[$station]) > 30) {
-                    array_shift($ConditionsQueueu[$station]);
-                }
-                if (count($CloudCoverQueueu[$station]) > 30) {
-                    array_shift($CloudCoverQueueu[$station]);
-                }
-                if (count($WindDirectionQueue[$station]) > 30) {
-                    array_shift($WindDirectionQueue[$station]);
-                }
+                $stationDewPointQueue = $DewPointQueue[$station] ?? $DewPointQueue[$station] = new Queue();
+                $stationDewPointQueue->enqueue(); 
 
-                $TempAVG = array_sum($TemperatureQueue[$station]) / count($TemperatureQueue[$station]);
-                $TemperatureAVG[$station] = $TempAVG;
+                $stationAirpressureStationQueue = $AirpressureStationQueue[$station] ?? $AirpressureStationQueue[$station]= new Queue();
+                $stationAirpressureStationQueue->enqueue(); 
 
-                if ($meting['TEMP'] >= $TemperatureAVG[$station] * 1.2 || $meting['TEMP'] <= $TemperatureAVG[$station] * 0.8 || $meting['TEMP'] == NULL) {
+                $stationAirpressureSeaQueue = $AirpressureSeaQueue[$station] ?? $AirpressureSeaQueue[$station] = new Queue();  
+                $stationAirpressureSeaQueue->enqueue(); 
+
+                $stationVisibilityQueue = $VisibilityQueue[$station] ?? $VisibilityQueue[$station] = new Queue();
+                $stationVisibilityQueue->enqueue(); 
+
+                $stationWindSpeedQueue = $WindSpeedQueue[$station] ?? $WindSpeedQueue[$station] = new Queue(); 
+                $stationWindSpeedQueue->enqueue(); 
+
+                $stationPercipitationQueue = $PercipitationQueue[$station]  ?? $PercipitationQueue[$station] = new Queue();
+                $stationPercipitationQueue->enqueue(); 
+
+                $stationSnowDepthQueue = $SnowDepthQueue[$station] ?? $SnowDepthQueue[$station] = new Queue();
+                $stationSnowDepthQueue->enqueue(); 
+
+                $stationConditionsQueueu = $ConditionsQueueu[$station] ?? $ConditionsQueueu[$station] = new Queue();  
+                $stationConditionsQueueu->enqueue(); 
+
+                $stationCloudCoverQueueu = $CloudCoverQueueu[$station] ?? $CloudCoverQueueu[$station] = new Queue();
+                $stationCloudCoverQueueu->enqueue(); 
+
+                $stationWindDirectionQueue = $WindDirectionQueue[$station] ?? $WindDirectionQueue[$station] = new Queue(); 
+                $stationWindDirectionQueue->enqueue(); 
+                
+                if ($meting['TEMP'] >= stationTemperatureQueue->AVG() * 1.2 || $meting['TEMP'] <= stationTemperatureQueue->AVG() * 0.8 || $meting['TEMP'] == NULL) {
                     $invalid_temperature = $meting['TEMP'];
                     $meting['TEMP'] = $TemperatureAVG[$station];
                 }
@@ -133,6 +132,7 @@ class DataLogger
                 $meting[$param] = 0;
             }
         }
+        else ;
     }
 }
 ?>
