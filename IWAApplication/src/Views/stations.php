@@ -6,10 +6,25 @@
     <title>Stations</title>
 </head>
 <body>
-    <p>
-    <?php
-        print($foo)
-    ?>
-    </p>
+    <button onclick="getStations()"></button>
 </body>
 </html>
+<script type="text/javascript">
+    async function getStations() {
+        const url = '/api/stations/'
+
+        try {
+            const response = await fetch(url);
+            console.log(response)
+            if(!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+
+            const json = await response.text();
+            console.log(json)
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>
