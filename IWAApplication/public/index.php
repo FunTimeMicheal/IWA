@@ -11,7 +11,7 @@ $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 
-$app->group('', new ViewsController());
-$app->group('', new ApiController());
+$app->group("", new ViewsController());
+$app->group("/api", new ApiController());
 
 $app->run();
