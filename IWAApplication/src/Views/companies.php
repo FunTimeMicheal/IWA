@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Roles</title>
+    <title>Companies</title>
 </head>
 <body>
     <header>
@@ -23,21 +23,19 @@
 
     <main id="contracts">
         <div class="header">
-            <input type="text" placeholder="Search Roles..">
+            <input type="text" placeholder="Search Companies..">
             <a href="" class="button">Search</a>
         </div>
 
         <table>
             <tbody>
                 <tr>
-                    <th>Role ID</th>
-                    <th>Role Name</th>
-                    <th>Role Description</th>
+                    <th>Comany ID</th>
+                    <th>Company Name</th>
                 </tr>
                  <tr>
                     <td>1</td>
                     <td>Boing</td>
-                    <td>Ping Pong...</td>
                  </tr>
             </tbody>
         </table>

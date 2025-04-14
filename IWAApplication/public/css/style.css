@@ -150,9 +150,8 @@ header a {
     font-size: 20px;
     align-self: center;
   }
+
 }
-
-
 
 #data {
   display: grid;
@@ -207,8 +206,6 @@ header a {
     padding-left: 16px;
   }
 }
-
-
 
 #landing {
   display: grid;
