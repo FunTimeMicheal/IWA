@@ -22,19 +22,21 @@
 </header>
 
 <main id="stations">
-    <div class="header">
+    <div id="header" class="header">
         <input type="text" placeholder="Search Regions..">
         <a href="" class="button">Search</a>
+        <button onclick="getData('/api/stations/')">Testing!</button>
+
     </div>
     <!-- For each region with it's own name, the below should be seen as an example -->
-    <div class="region">
+    <!-- <div class="region">
         <h2>Groningen</h2>
         <div class="stations">
             <h4 class="station">0</h4>
             <h4 class="station error">1</h4>
             <h4 class="station warning">2</h4>
         </div>
-    </div>
+    </div> -->
 </main>
 
 </body>
