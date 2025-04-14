@@ -40,5 +40,10 @@ class ViewsController {
       $renderer = new PhpRenderer(getcwd() . "/src/views");
       return $renderer->render($response, "users.php");
     });
+
+    $group->get("/login", function (Request $request, Response $response, array $args) {
+      $renderer = new PhpRenderer(getcwd() . "/src/views");
+      return $renderer->render($response, "login.php");
+    });
   }
 }

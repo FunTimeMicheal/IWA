@@ -39,7 +39,8 @@ class User {
     #[ORM\Column(type:'string')]
     private string $password;
 
-    public function __construct(string $name, string $first_name, string $initials, string $prefix, string $email, int $employee_code, string $password) {
+    public function __construct(UserRole $userrole, string $name, string $first_name, string $initials, string $prefix, string $email, int $employee_code, string $password) {
+        $this->userrole = $userrole;
         $this->name  = $name;
         $this->first_name  = $first_name;
         $this->initials  = $initials;
