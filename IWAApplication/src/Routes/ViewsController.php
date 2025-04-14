@@ -21,6 +21,11 @@ class ViewsController {
       return $renderer->render($response, "stations.php");
     });
 
+    $group->get("/home", function (Request $request, Response $response, array $args) {
+      $renderer = new PhpRenderer(getcwd() . "/src/views");
+      return $renderer->render($response, "home.php");
+    });
+
     $group->get("/companies", function (Request $request, Response $response, array $args) {
       $renderer = new PhpRenderer(getcwd() . "/src/views");
       return $renderer->render($response, "companies.php");
@@ -39,6 +44,11 @@ class ViewsController {
     $group->get("/users", function (Request $request, Response $response, array $args) {
       $renderer = new PhpRenderer(getcwd() . "/src/views");
       return $renderer->render($response, "users.php");
+    });
+
+    $group->get("/data", function (Request $request, Response $response, array $args) {
+      $renderer = new PhpRenderer(getcwd() . "/src/views");
+      return $renderer->render($response, "data.php");
     });
   }
 }
