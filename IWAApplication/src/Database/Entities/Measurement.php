@@ -38,8 +38,8 @@ class Measurement {
     private float $percipation;
     #[ORM\Column(type:'float')]
     private float $snow_depth;
-    #[ORM\Column(type:'string')]
-    private string $conditions;
+    #[ORM\Column(type:'integer')]
+    private int $conditions;
     #[ORM\Column(type:'float')]
     private float $cloud_cover;
     #[ORM\Column(type:'integer')]

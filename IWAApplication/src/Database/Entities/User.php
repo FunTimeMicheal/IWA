@@ -9,7 +9,7 @@ use IWA\Application\Lib\Traits\Entity;
 
 class User {
     use Entity;
-    
+
     #[ORM\Id]
     #[ORM\Column(type:'integer')]
     #[ORM\GeneratedValue]
@@ -19,16 +19,10 @@ class User {
     private UserRole|null $userrole;
 
     #[ORM\Column(type:'string')]
-    private string $name;
-
-    #[ORM\Column(type:'string')]
     private string $first_name;
 
     #[ORM\Column(type:'string')]
-    private string $initials;
-
-    #[ORM\Column(type:'string')]
-    private string $prefix;
+    private string $last_name;
 
     #[ORM\Column(type:'string')]
     private string $email;
@@ -39,16 +33,13 @@ class User {
     #[ORM\Column(type:'string')]
     private string $password;
 
-    public function __construct(UserRole $userrole, string $name, string $first_name, string $initials, string $prefix, string $email, int $employee_code, string $password) {
+    public function __construct(UserRole $userrole, string $first_name, string $last_name, string $email, int $employee_code, string $password) {
         $this->userrole = $userrole;
-        $this->name  = $name;
         $this->first_name  = $first_name;
-        $this->initials  = $initials;
-        $this->prefix  = $prefix;
+        $this->last_name = $last_name;
         $this->email  = $email;
         $this->employee_code  = $employee_code;
         $this->password  = $password;
-
     }
 
     public function jsonSerialize() {
