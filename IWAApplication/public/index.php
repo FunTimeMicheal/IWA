@@ -12,6 +12,6 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 
 $app->group('', new ViewsController());
-$app->group('', new ApiController());
+$app->group('/api', new ApiController());
 
 $app->run();

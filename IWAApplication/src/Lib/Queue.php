@@ -10,12 +10,12 @@ class Queue {
     }
 
     public function enqueue($item) {
-        $this->queue[$head] = $item;
-        $head = ($head + 1) % 30;
+        $this->queue[$this->head] = $item;
+        $head = ($this->head + 1) % 30;
     }
 
     public function AVG() {
-        return array_sum($queue) / count($queue);
+        return array_sum($this->queue) / count($this->queue);
     }
 }
 

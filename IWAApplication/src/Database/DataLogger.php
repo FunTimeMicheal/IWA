@@ -1,25 +1,26 @@
 <?php
 namespace IWA\Application\Database;
 
+use DateTime;
 use IWA\Application\Lib\Queue;
 
 class DataLogger
 {
-    $invalid_temperature = null;
-    $weatherByStation = [];
-    $TemperatureAVG = [];
-    $correctieStation = [];
-    $TemperatureQueue = [];
-    $DewPointQueue = [];
-    $AirpressureStationQueue = [];
-    $AirpressureSeaQueue = [];
-    $VisibilityQueue = [];
-    $WindSpeedQueue = [];
-    $PercipitationQueue = [];
-    $SnowDepthQueue = [];
-    $ConditionsQueueu = [];
-    $CloudCoverQueueu = [];
-    $WindDirectionQueue = [];
+    private $invalid_temperature = [];
+    private $weatherByStation = [];
+    private $TemperatureAVG = [];
+    private $correctieStation = [];
+    private $TemperatureQueue = [];
+    private $DewPointQueue = [];
+    private $AirpressureStationQueue = [];
+    private $AirpressureSeaQueue = [];
+    private $VisibilityQueue = [];
+    private $WindSpeedQueue = [];
+    private $PercipitationQueue = [];
+    private $SnowDepthQueue = [];
+    private $ConditionsQueueu = [];
+    private $CloudCoverQueueu = [];
+    private $WindDirectionQueue = [];
 
     
 
@@ -29,53 +30,53 @@ class DataLogger
                 $station = $meting['STN'];
                 
                 $stationTemperatureQueue = $TemperatureQueue[$station] ?? $TemperatureQueue[$station] = new Queue();
-                $stationTemperatureQueue->enqueue();
+                $stationTemperatureQueue->enqueue('TEMP');
 
                 $stationDewPointQueue = $DewPointQueue[$station] ?? $DewPointQueue[$station] = new Queue();
-                $stationDewPointQueue->enqueue(); 
+                $stationDewPointQueue->enqueue('DEWP'); 
 
                 $stationAirpressureStationQueue = $AirpressureStationQueue[$station] ?? $AirpressureStationQueue[$station]= new Queue();
-                $stationAirpressureStationQueue->enqueue(); 
+                $stationAirpressureStationQueue->enqueue('STP'); 
 
                 $stationAirpressureSeaQueue = $AirpressureSeaQueue[$station] ?? $AirpressureSeaQueue[$station] = new Queue();  
-                $stationAirpressureSeaQueue->enqueue(); 
+                $stationAirpressureSeaQueue->enqueue('SLP'); 
 
                 $stationVisibilityQueue = $VisibilityQueue[$station] ?? $VisibilityQueue[$station] = new Queue();
-                $stationVisibilityQueue->enqueue(); 
+                $stationVisibilityQueue->enqueue('VISIB'); 
 
                 $stationWindSpeedQueue = $WindSpeedQueue[$station] ?? $WindSpeedQueue[$station] = new Queue(); 
-                $stationWindSpeedQueue->enqueue(); 
+                $stationWindSpeedQueue->enqueue('WDSP'); 
 
                 $stationPercipitationQueue = $PercipitationQueue[$station]  ?? $PercipitationQueue[$station] = new Queue();
-                $stationPercipitationQueue->enqueue(); 
+                $stationPercipitationQueue->enqueue('PRCP'); 
 
                 $stationSnowDepthQueue = $SnowDepthQueue[$station] ?? $SnowDepthQueue[$station] = new Queue();
-                $stationSnowDepthQueue->enqueue(); 
+                $stationSnowDepthQueue->enqueue('SNDP'); 
 
                 $stationConditionsQueueu = $ConditionsQueueu[$station] ?? $ConditionsQueueu[$station] = new Queue();  
-                $stationConditionsQueueu->enqueue(); 
+                $stationConditionsQueueu->enqueue('FRSHTT'); 
 
                 $stationCloudCoverQueueu = $CloudCoverQueueu[$station] ?? $CloudCoverQueueu[$station] = new Queue();
-                $stationCloudCoverQueueu->enqueue(); 
+                $stationCloudCoverQueueu->enqueue('CLDC'); 
 
                 $stationWindDirectionQueue = $WindDirectionQueue[$station] ?? $WindDirectionQueue[$station] = new Queue(); 
-                $stationWindDirectionQueue->enqueue(); 
+                $stationWindDirectionQueue->enqueue('WNDDIR'); 
                 
-                if ($meting['TEMP'] >= stationTemperatureQueue->AVG() * 1.2 || $meting['TEMP'] <= stationTemperatureQueue->AVG() * 0.8 || $meting['TEMP'] == NULL) {
+                if ($meting['TEMP'] >= $stationTemperatureQueue->AVG() * 1.2 || $meting['TEMP'] <= $stationTemperatureQueue->AVG() * 0.8 || $meting['TEMP'] == NULL) {
                     $invalid_temperature = $meting['TEMP'];
-                    $meting['TEMP'] = $TemperatureAVG[$station];
+                    $meting['TEMP'] = $this->TemperatureAVG[$station];
                 }
 
-                processQueue($meting, 'DEWP', $DewPointQueue[$station]);
-                processQueue($meting, 'STP', $AirpressureStationQueue[$station]);
-                processQueue($meting, 'SLP', $AirpressureSeaQueue[$station]);
-                processQueue($meting, 'VISIB', $VisibilityQueue[$station]);
-                processQueue($meting, 'WDSP', $WindSpeedQueue[$station]);
-                processQueue($meting, 'PRCP', $PercipitationQueue[$station]);
-                processQueue($meting, 'SNDP', $SnowDepthQueue[$station]);
-                processQueue($meting, 'FRSHTT', $ConditionsQueueu[$station]);
-                processQueue($meting, 'CLDC', $CloudCoverQueueu[$station]);
-                processQueue($meting, 'WNDDIR', $WindDirectionQueue[$station]);
+                $this->processQueue($meting, 'DEWP', $DewPointQueue[$station]);
+                $this->processQueue($meting, 'STP', $AirpressureStationQueue[$station]);
+                $this->processQueue($meting, 'SLP', $AirpressureSeaQueue[$station]);
+                $this->processQueue($meting, 'VISIB', $VisibilityQueue[$station]);
+                $this->processQueue($meting, 'WDSP', $WindSpeedQueue[$station]);
+                $this->processQueue($meting, 'PRCP', $PercipitationQueue[$station]);
+                $this->processQueue($meting, 'SNDP', $SnowDepthQueue[$station]);
+                $this->processQueue($meting, 'FRSHTT', $ConditionsQueueu[$station]);
+                $this->processQueue($meting, 'CLDC', $CloudCoverQueueu[$station]);
+                $this->processQueue($meting, 'WNDDIR', $WindDirectionQueue[$station]);
 
                 if (!isset($correctieStation[$station])) {
                     $TemperatureQueue[$station] = [];
