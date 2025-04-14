@@ -49,6 +49,7 @@ class ViewsController {
     $group->get("/data", function (Request $request, Response $response, array $args) {
       $renderer = new PhpRenderer(getcwd() . "/src/views");
       return $renderer->render($response, "data.php");
+    });
       
     $group->get("/login", function (Request $request, Response $response, array $args) {
       $renderer = new PhpRenderer(getcwd() . "/src/views");
