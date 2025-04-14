@@ -14,7 +14,7 @@ class CompaniesController {
       /**
        * @var EntityManager $entityManager
        */
-      $entityManager = require_once getcwd() . "/src/Database/bootstrap.php";
+      $entityManager = require getcwd() . "/src/Database/bootstrap.php";
 
       $group->get("/", function (Request $request, Response $response) use ($entityManager) {
           $data = $entityManager->getRepository(Company::class)->findAll();
