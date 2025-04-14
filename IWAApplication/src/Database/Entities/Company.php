@@ -4,11 +4,15 @@ namespace IWA\Application\Database\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use IWA\Application\Lib\Traits\Entity;
+use JsonSerializable;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'companies')]
 
-class Company {
+class Company implements JsonSerializable {
+    use Entity;
+
     #[ORM\Id]
     #[ORM\Column(type:'integer')]
     #[ORM\GeneratedValue]
@@ -48,5 +52,12 @@ class Company {
         $this->zip_code  = $zip_code;
         $this->email  = $email;
         $this->relations = new ArrayCollection();
+    }
+
+    public function jsonSerialize() {
+        $data = get_object_vars($this);
+        $data["location"] = $data["location"]["id"];
+        unset($data["relations"]);
+        return $data;
     }
 }

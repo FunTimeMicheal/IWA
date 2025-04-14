@@ -1,14 +1,12 @@
 <?php
 namespace IWA\Application\Routes\Api;
 
-use Doctrine\ORM\EntityManager;
-use IWA\Application\Database\Entities\User;
 use IWA\Application\Database\Entities\UserRole;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class UsersController {
+class UserRolesController {
     public function __invoke(RouteCollectorProxy $group) {
         /**
          * @var EntityManager $entityManager
@@ -17,14 +15,14 @@ class UsersController {
 
 
         $group->get("/", function (Request $request, Response $response) use ($entityManager) {
-            $data = $entityManager->getRepository(User::class)->findAll();
+            $data = $entityManager->getRepository(UserRole::class)->findAll();
             $response->getBody()->write(json_encode($data));
             return $response->withHeader("Content-Type", "application/json");
         });
 
 
         $group->get("/{id}", function (Request $request, Response $response, array $args) use ($entityManager) {
-            $station = $entityManager->getRepository(User::class)->find($args["id"]);
+            $station = $entityManager->getRepository(UserRole::class)->find($args["id"]);
             $response->getBody()->write(json_encode($station));
             return $response->withHeader("Content-Type", "application/json");
         });
@@ -32,9 +30,8 @@ class UsersController {
 
         $group->post("/", function (Request $request, Response $response) use ($entityManager) {
             $data = $request->getParsedBody();
-            $data["nearest_location"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
 
-            $station = User::fromArray($data);
+            $station = UserRole::fromArray($data);
             $entityManager->persist($station);
             $entityManager->flush();
 
@@ -45,9 +42,8 @@ class UsersController {
 
         $group->patch("/{id}", function (Request $request, Response $response, array $args) use ($entityManager) {
             $data = $request->getParsedBody();
-            $data["nearest_location"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
 
-            $station = $entityManager->getRepository(User::class)->find($args["id"]);
+            $station = $entityManager->getRepository(UserRole::class)->find($args["id"]);
             $station->patch($data);
 
             $response->getBody()->write(json_encode($station));

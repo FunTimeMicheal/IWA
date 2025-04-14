@@ -2,11 +2,14 @@
 namespace IWA\Application\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use IWA\Application\Lib\Traits\Entity;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'relations')]
 
 class Relation {
+  use Entity;
+  
   #[ORM\Id]
   #[ORM\Column(type:'integer')]
   #[ORM\GeneratedValue]

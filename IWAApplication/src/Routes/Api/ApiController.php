@@ -9,11 +9,11 @@ class ApiController {
   public function __invoke(RouteCollectorProxy $group) {
     $group->group("/companies", new CompaniesController());
     $group->group("/contracts", new ContractsController());
-    $group->group("/roles", new RolesController());
+    $group->group("/roles", new UserRolesController());
     $group->group("/stations", new StationsController());
     $group->group("/users", new UsersController());
 
-    $group->post("/ingest", function (Request $request, Response $response, array $args) {
+    $group->post("/ingest", function (Request $request, Response $response) {
       //
     });
   }
