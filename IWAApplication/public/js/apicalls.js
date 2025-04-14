@@ -5,7 +5,7 @@ async function getData(url) {
             throw new Error(`Response status: ${response.status}`);
         }
 
-        const json = await response.text();
+        const json = await response.json().catch(() => {});
         console.log(json)
 
     } catch (error) {
@@ -22,7 +22,7 @@ async function postData(url) {
             throw new Error(`Response status: ${response.status}`);
         }
 
-        const json = await response.text();
+        const json = await response.json().catch(() => {});
         console.log(json)
 
     } catch (error) {
@@ -40,7 +40,7 @@ async function patchData(url) {
             throw new Error(`Response status: ${response.status}`);
         }
 
-        const json = await response.text();
+        const json = await response.json().catch(() => {});
         console.log(json)
 
     } catch (error) {
@@ -57,7 +57,7 @@ async function deleteData(url) {
             throw new Error(`Response status: ${response.status}`);
         }
 
-        const json = await response.text();
+        const json = await response.json().catch(() => {});
         console.log(json)
 
     } catch (error) {
