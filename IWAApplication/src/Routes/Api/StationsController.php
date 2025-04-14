@@ -11,7 +11,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class StationsController {
   public function __invoke(RouteCollectorProxy $group) {
     /**
-     * @var EntityManager
+     * @var EntityManager $entityManager
      */
     $entityManager = require_once getcwd() . "/src/Database/bootstrap.php";
 
