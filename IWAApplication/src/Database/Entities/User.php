@@ -51,4 +51,10 @@ class User {
 
     }
 
+    public function jsonSerialize() {
+        $data = get_object_vars($this);
+        $data["userrole"] = $data["userrole"]["id"];
+        return $data;
+    }
+
 }
