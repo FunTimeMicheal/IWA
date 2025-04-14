@@ -28,20 +28,48 @@
         </div>
 
         <table>
-            <tbody>
+            <tbody id="tablebody">
                 <tr>
                     <th>Role ID</th>
                     <th>Role Name</th>
                     <th>Role Description</th>
                 </tr>
-                 <tr>
-                    <td>1</td>
-                    <td>Boing</td>
-                    <td>Ping Pong...</td>
-                 </tr>
             </tbody>
         </table>
     </main>
 
 </body>
 </html>
+<script src="/js/apicalls.js"></script>
+<script>
+    async function getRoleData() {
+    try {
+        const response = await fetch('/api/roles/');
+        if(!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json().catch(() => {});
+        console.log(json)
+
+        for (const item of json) {
+            const dataElement = Object.assign(document.createElement('tr'), {
+                innerHTML: /* html */`
+                    <td>${item.id}</td>
+                    <td>${item.role}</td>
+                    <td>${item.description}</td>
+              `,
+            });
+    
+            const parent = document.getElementById("tablebody");
+            parent.appendChild(dataElement);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+window.onload = function() {
+    getRoleData()
+}
+</script>

@@ -47,17 +47,46 @@
                 
             </div>
             <table>
-                <tbody>
+                <tbody id="tablebody">
                     <tr>
                         <th>Temperature</th>
                         <th>Other</th>
-                    </tr>
-                    <tr>
-                        <td>69.16964171103331</td>
-                        <td>12.660522708994833</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
 </body>
+<script src="/js/apicalls.js"></script>
+<script>
+    //TODO: mist het exacte endpoint waar de call naar gedaan moet worden en er zal waarschijnlijk meer data getoond moeten worden
+    async function getMeasurementData() {
+    try {
+        const response = await fetch('');
+        if(!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json().catch(() => {});
+        console.log(json)
+
+        for (const item of json) {
+            const dataElement = Object.assign(document.createElement('tr'), {
+                innerHTML: /* html */`
+                    <td>${item.temperature}</td>
+                    <td>${item.percipation}</td>
+              `,
+            });
+    
+            const parent = document.getElementById("tablebody");
+            parent.appendChild(dataElement);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+window.onload = function() {
+    getMeasurementData()
+}
+</script>

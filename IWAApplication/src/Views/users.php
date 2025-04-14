@@ -28,20 +28,48 @@
         </div>
 
         <table>
-            <tbody>
+            <tbody id="tablebody">
                 <tr>
                     <th>User ID</th>
                     <th>User Name</th>
                     <th>User Role ID</th>
                 </tr>
-                 <tr>
-                    <td>1</td>
-                    <td>Boing</td>
-                    <td>2</td>
-                 </tr>
             </tbody>
         </table>
     </main>
 
 </body>
 </html>
+<script src="/js/apicalls.js"></script>
+<script>
+    async function getUserData() {
+    try {
+        const response = await fetch('/api/users/');
+        if(!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json().catch(() => {});
+        console.log(json)
+
+        for (const item of json) {
+            const dataElement = Object.assign(document.createElement('tr'), {
+                innerHTML: /* html */`
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.userrole_id}</td>
+              `,
+            });
+    
+            const parent = document.getElementById("tablebody");
+            parent.appendChild(dataElement);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+window.onload = function() {
+    getUserData()
+}
+</script>

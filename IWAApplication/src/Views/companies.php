@@ -28,7 +28,7 @@
         </div>
 
         <table>
-            <tbody>
+            <tbody id="tablebody">
                 <tr>
                     <th>Comany ID</th>
                     <th>Company Name</th>
@@ -43,3 +43,35 @@
 
 </body>
 </html>
+<script src="/js/apicalls.js"></script>
+<script>
+    async function getCompanyData() {
+    try {
+        const response = await fetch('/api/companies/');
+        if(!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json().catch(() => {});
+        console.log(json)
+
+        for (const item of json) {
+            const dataElement = Object.assign(document.createElement('tr'), {
+                innerHTML: /* html */`
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+              `,
+            });
+    
+            const parent = document.getElementById("tablebody");
+            parent.appendChild(dataElement);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+window.onload = function() {
+    getCompanyData()
+}
+</script>

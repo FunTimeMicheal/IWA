@@ -25,20 +25,46 @@
     <div id="header" class="header">
         <input type="text" placeholder="Search Regions..">
         <a href="" class="button">Search</a>
-        <button onclick="getData('/api/stations/')">Testing!</button>
-
     </div>
-    <!-- For each region with it's own name, the below should be seen as an example -->
-    <!-- <div class="region">
-        <h2>Groningen</h2>
-        <div class="stations">
-            <h4 class="station">0</h4>
-            <h4 class="station error">1</h4>
-            <h4 class="station warning">2</h4>
-        </div>
-    </div> -->
 </main>
 
 </body>
 </html>
-<script src="/js/apicalls.js"></script> 
+<script src="/js/apicalls.js"></script>
+<script>
+    //TODO: Zorg ervoor dat dit op basis van region en bijbehorende stations gebeurt in plaats van alleen de stations
+    async function getStationData() {
+    try {
+        const response = await fetch('/api/stations/');
+        if(!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json().catch(() => {});
+        console.log(json)
+
+        for (const item of json) {
+            const dataElement = Object.assign(document.createElement('div'), {
+                className: 'region',
+                innerHTML: /* html */`
+                <h2>Groningen</h2>
+                <div class="stations">
+                    <h4 class="station">0</h4>
+                    <h4 class="station error">1</h4>
+                    <h4 class="station warning">2</h4>
+                </div>
+              `,
+            });
+    
+            const parent = document.getElementById("stations");
+            parent.appendChild(dataElement);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+window.onload = function() {
+    getStationData()
+}
+</script>

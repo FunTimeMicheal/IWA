@@ -21,3 +21,4 @@
     </main>
 </body>
 </html>
+<script src="/js/apicalls.js"></script>
