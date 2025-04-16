@@ -57,9 +57,10 @@
 
         for (const item in json) {
             const dataElement = Object.assign(document.createElement('tr'), {
+                class: 'data-item',
                 innerHTML: /* html */`
-                    <td>${item.id}</td>
-                    <td>${item.name}</td>
+                    <td>${json[item].id}</td>
+                    <td>${item[item].name}</td>
               `,
             });
     
