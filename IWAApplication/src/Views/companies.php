@@ -33,18 +33,38 @@
                     <th>Comany ID</th>
                     <th>Company Name</th>
                 </tr>
-                 <tr>
-                    <td>1</td>
-                    <td>Boing</td>
-                 </tr>
             </tbody>
         </table>
+
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>
     </main>
 
 </body>
 </html>
 <script src="/js/apicalls.js"></script>
 <script>
+
+    var modal = document.getElementById("infoModal");
+    // var modalOpeners = document.getElementsByClassName("data-item");
+    var closer = document.getElementsByClassName("close")[0];
+
+    console.log(modal,closer)
+
+    // Array.from(modalOpeners).forEach(item => {
+    //     item.onclick = function() {
+    //         modal.style.display = "block";
+    //     };
+    // });
+
+    closer.onclick = function() {
+    modal.style.display = "none";
+    }
+    
     async function getCompanyData() {
     try {
         const response = await fetch('/api/companies/');
@@ -57,11 +77,16 @@
 
         for (const item of json) {
             const dataElement = Object.assign(document.createElement('tr'), {
+                class: 'data-item', 
                 innerHTML: /* html */`
                     <td>${item.id}</td>
                     <td>${item.name}</td>
               `,
             });
+
+            dataElement.onclick = () => {
+                modal.style.display = "block";
+            };
     
             const parent = document.getElementById("tablebody");
             parent.appendChild(dataElement);

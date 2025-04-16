@@ -353,3 +353,32 @@ header a {
     gap: 8px;
   }
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  background-color: #efefef;
+
+  .modal-content {
+    background-color: #efefef;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
