@@ -30,16 +30,15 @@
         <table>
             <tbody id="tablebody">
                 <tr>
-                    <th>Comany ID</th>
+                    <th>Company ID</th>
                     <th>Company Name</th>
                 </tr>
             </tbody>
         </table>
 
         <div id="infoModal" class="modal">
-            <div class="modal-content">
+            <div id="infoModal-content" class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
             </div>
         </div>
     </main>
@@ -50,19 +49,15 @@
 <script>
 
     var modal = document.getElementById("infoModal");
-    // var modalOpeners = document.getElementsByClassName("data-item");
     var closer = document.getElementsByClassName("close")[0];
-
-    console.log(modal,closer)
-
-    // Array.from(modalOpeners).forEach(item => {
-    //     item.onclick = function() {
-    //         modal.style.display = "block";
-    //     };
-    // });
+    var modalContent = document.getElementById("infoModal-content");
+    var modalForm = null;
 
     closer.onclick = function() {
-    modal.style.display = "none";
+        var modalForm = document.getElementById("modal-form");
+        console.log(modalForm);
+        modalContent.removeChild(modalForm);
+        modal.style.display = "none";
     }
     
     async function getCompanyData() {
@@ -79,13 +74,44 @@
             const dataElement = Object.assign(document.createElement('tr'), {
                 class: 'data-item', 
                 innerHTML: /* html */`
-                    <td>${item.id}</td>
-                    <td>${item.name}</td>
+                    <td>${json[item].id}</td>
+                    <td>${json[item].name}</td>
               `,
             });
 
             dataElement.onclick = () => {
                 modal.style.display = "block";
+
+                const form = Object.assign(document.createElement('form'), {
+                id: "modal-form",
+                innerHTML: /* html */`
+                <label for="location">Location ID:</label>
+                <input type="text" id="location" name="location" value="${json[item].location}"><br>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="${json[item].name}"><br>
+
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" value="${json[item].email}"><br>
+
+                <label for="number">Huisnummer:</label>
+                <input type="text" id="number" name="number" value="${json[item].number}"><br>
+
+                <label for="additional">Toevoeging:</label>
+                <input type="text" id="additional" name="additional" value="${json[item].number_additional}"><br>
+
+                <label for="street">Straatnaam:</label>
+                <input type="text" id="street" name="street" value="${json[item].street}"><br>
+
+                <label for="zip_code">Postcode:</label>
+                <input type="text" id="zip_code" name="zip_code" value="${json[item].zip_code}"><br>
+
+                <input class="button" type="submit" value="Submit changes">
+                <input class="button" type="button" value= "Delete">
+              `,
+            });
+                modalContent.appendChild(form);
+                console.log(modalForm);
             };
     
             const parent = document.getElementById("tablebody");
