@@ -21,14 +21,27 @@
     <a href="#login">Log Out</a>
 </header>
 
-<main id="stations">
+<main id="contracts">
     <div id="header" class="header">
         <input type="text" placeholder="Search Regions..">
         <a href="" class="button">Search</a>
     </div>
 
     <table>
-        
+        <tbody id="tablebody">
+            <tr>
+                <th>Station ID</th>
+                <th>Station Name</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+                <th>Elevation</th>
+                <th>Nearest location</th>
+            </tr>
+            <tr>
+                
+
+            </tr>
+        </tbody>
     </table>
 </main>
 
@@ -48,19 +61,19 @@
         console.log(json)
 
         for (const item in json) {
-            const dataElement = Object.assign(document.createElement('div'), {
+            const dataElement = Object.assign(document.createElement('tr'), {
                 className: 'region',
                 innerHTML: /* html */`
-                <h2>Groningen</h2>
-                <div class="stations">
-                    <h4 class="station">0</h4>
-                    <h4 class="station error">1</h4>
-                    <h4 class="station warning">2</h4>
-                </div>
+                <td>${json[item].id}</td> 
+                <td>${json[item].name}</td>
+                <td>${json[item].longitude}</td>
+                <td>${json[item].latitude}</td>
+                <td>${json[item].elevation}</td>
+                <td>${json[item].nearest_location}</td>
               `,
             });
     
-            const parent = document.getElementById("stations");
+            const parent = document.getElementById("tablebody");
             parent.appendChild(dataElement);
         }
     } catch (error) {

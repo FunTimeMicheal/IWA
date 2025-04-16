@@ -73,6 +73,7 @@
 
         for (const item in json) {
             const dataElement = Object.assign(document.createElement('tr'), {
+
                 class: 'data-item', 
                 innerHTML: /* html */`
                     <td>${json[item].id}</td>
@@ -109,6 +110,10 @@
 
                 <input class="button" type="submit" value="Submit changes">
                 <input class="button" type="button" value= "Delete">
+                class: 'data-item',
+                innerHTML: /* html */`
+                    <td>${json[item].id}</td>
+                    <td>${item[item].name}</td>
               `,
             });
                 modalContent.appendChild(form);
