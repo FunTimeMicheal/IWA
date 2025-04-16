@@ -25,6 +25,7 @@
         <div class="header">
             <input type="text" placeholder="Search Companies..">
             <a href="" class="button">Search</a>
+            <a href="" class="button">Add</a>
         </div>
 
         <table>
