@@ -54,9 +54,9 @@ class Company implements JsonSerializable {
         $this->relations = new ArrayCollection();
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         $data = get_object_vars($this);
-        $data["location"] = $data["location"]["id"];
+        $data["location"] = $data["location"]?->getId();
         unset($data["relations"]);
         return $data;
     }

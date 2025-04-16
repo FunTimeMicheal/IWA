@@ -37,12 +37,16 @@ class Station implements JsonSerializable
     private Geolocation|null $nearest_location;
 
 
-    public function __construct(string $name, float $longitude, float $latitude, float $elevation) {
+    public function __construct(string $name, float $longitude, float $latitude, float $elevation, Geolocation $nearest_location) {
         $this->name = $name;
         $this->longitude = $longitude;
         $this->latitude = $latitude;
         $this->elevation = $elevation;
         $this->measurements = new ArrayCollection();
+        $this->nearest_location = $nearest_location;
+    }
+    public function getId(): int {
+        return $this->id;
     }
 
     public function getName() {
@@ -61,9 +65,9 @@ class Station implements JsonSerializable
         return $this->elevation;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         $data = get_object_vars($this);
-        $data["nearest_location"] = $data["nearest_location"]["id"];
+        $data["nearest_location"] = $data["nearest_location"]?->getId();
         unset($data["measurements"]);
         return $data;
     }
