@@ -3,11 +3,12 @@ namespace IWA\Application\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use IWA\Application\Lib\Traits\Entity;
+use JsonSerializable;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
 
-class User {
+class User implements JsonSerializable{
     use Entity;
 
     #[ORM\Id]
@@ -42,10 +43,9 @@ class User {
         $this->password  = $password;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         $data = get_object_vars($this);
-        $data["userrole"] = $data["userrole"]["id"];
+        $data["userrole"] = $data["userrole"]?->getId();
         return $data;
     }
-
 }

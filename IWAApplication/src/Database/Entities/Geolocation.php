@@ -34,11 +34,11 @@ class Geolocation {
     #[ORM\OneToMany(targetEntity: Company::class, mappedBy: 'location')]
     private Collection $companies;
 
-    #[ORM\Column(type: 'string')]
-    private string $latitude;
+    #[ORM\Column(type: 'float')]
+    private float $latitude;
 
-    #[ORM\Column(type: 'string')]
-    private string $longitude;
+    #[ORM\Column(type: 'float')]
+    private float $longitude;
 
     public function __construct(string $name, string $type, Geolocation $parent, $longitude, float $latitude) {
         $this->name = $name;
@@ -53,5 +53,9 @@ class Geolocation {
 
     public function getName(): string {
         return $this->name;
+    }
+
+    public function getId(): int {
+        return $this->id;
     }
 }

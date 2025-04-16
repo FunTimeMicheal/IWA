@@ -7,6 +7,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ContractsController {
   public function __invoke(RouteCollectorProxy $group) {
-    // 
+    //
   }
 }

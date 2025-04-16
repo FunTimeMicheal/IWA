@@ -77,4 +77,10 @@ class Measurement {
     {
         return $this->station;
     }
+
+    public function jsonSerialize():mixed {
+        $data = get_object_vars($this);
+        $data["station"] = $data["station"]?->getId();
+        return $data;
+    }
 }
