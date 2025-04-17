@@ -70,29 +70,30 @@
 
         const form = Object.assign(document.createElement('form'), {
             id: "modal-form",
-            action: "/api/companies/",
+            action: "api/companies/",
             method: "POST",
             innerHTML: /* html */`
-            <label for="location">Location ID:</label>
-            <input type="text" id="location" name="location"><br>
 
             <label for="name">Name:</label>
             <input type="text" id="name" name="name"><br>
 
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email"><br>
+            <label for="street">Straatnaam:</label>
+            <input type="text" id="street" name="street"><br>
 
             <label for="number">Huisnummer:</label>
             <input type="text" id="number" name="number"><br>
 
-            <label for="additional">Toevoeging:</label>
-            <input type="text" id="additional" name="additional"><br>
-
-            <label for="street">Straatnaam:</label>
-            <input type="text" id="street" name="street"><br>
+            <label for="nummer_additional">Toevoeging:</label>
+            <input type="text" id="nummer_additional" name="nummer_additional"><br>
 
             <label for="zip_code">Postcode:</label>
             <input type="text" id="zip_code" name="zip_code"><br>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br>
+
+            <label for="location">Location ID:</label>
+            <input type="text" id="location" name="location"><br>
 
             <input class="button" type="submit" value="Add">
               `,
