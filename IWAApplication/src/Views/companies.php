@@ -25,7 +25,7 @@
         <div class="header">
             <input type="text" placeholder="Search Companies..">
             <a href="" class="button">Search</a>
-            <a href="" class="button">Add</a>
+            <a id="addButton" href="#" class="button">Add</a>
         </div>
 
         <table>
@@ -53,12 +53,51 @@
     var closer = document.getElementsByClassName("close")[0];
     var modalContent = document.getElementById("infoModal-content");
     var modalForm = null;
+    var addButton = document.getElementById("addButton");
 
     closer.onclick = function() {
         var modalForm = document.getElementById("modal-form");
+        if (!modalForm) {
+            var modalForm = document.getElementById("modal-form-patch");
+        }
         console.log(modalForm);
         modalContent.removeChild(modalForm);
         modal.style.display = "none";
+    }
+
+    addButton.onclick = function() {
+        modal.style.display = "block";
+
+        const form = Object.assign(document.createElement('form'), {
+            id: "modal-form",
+            action: "/api/companies/",
+            method: "POST",
+            innerHTML: /* html */`
+            <label for="location">Location ID:</label>
+            <input type="text" id="location" name="location"><br>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br>
+
+            <label for="number">Huisnummer:</label>
+            <input type="text" id="number" name="number"><br>
+
+            <label for="additional">Toevoeging:</label>
+            <input type="text" id="additional" name="additional"><br>
+
+            <label for="street">Straatnaam:</label>
+            <input type="text" id="street" name="street"><br>
+
+            <label for="zip_code">Postcode:</label>
+            <input type="text" id="zip_code" name="zip_code"><br>
+
+            <input class="button" type="submit" value="Add">
+              `,
+        });
+        modalContent.appendChild(form);
     }
     
     async function getCompanyData() {
@@ -79,12 +118,18 @@
                     <td>${json[item].name}</td>
               `,
             });
+
+
+
             dataElement.onclick = () => {
                 modal.style.display = "block";
 
                 const form = Object.assign(document.createElement('form'), {
-                id: "modal-form",
+                id: "modal-form-patch",
                 innerHTML: /* html */`
+
+                <input type="hidden" id="id" name="id" value="${json[item].id}"><br>
+
                 <label for="location">Location ID:</label>
                 <input type="text" id="location" name="location" value="${json[item].location}"><br>
 
@@ -107,10 +152,10 @@
                 <input type="text" id="zip_code" name="zip_code" value="${json[item].zip_code}"><br>
 
                 <input class="button" type="submit" value="Submit changes">
-                <input class="button" type="button" value= "Delete">
               `,
             });
                 modalContent.appendChild(form);
+                listenForPatch()
             };
     
             const parent = document.getElementById("tablebody");
@@ -119,6 +164,23 @@
     } catch (error) {
         console.error(error);
     }
+}
+
+function listenForPatch() {
+    document.getElementById("modal-form-patch").addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const jsonData = Object.fromEntries(formData.entries());
+
+        fetch(`api/companies/${jsonData.id}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData),
+        });
+    });
 }
 
 window.onload = function() {
