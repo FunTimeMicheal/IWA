@@ -56,13 +56,7 @@
     var addButton = document.getElementById("addButton");
 
     closer.onclick = function() {
-        var modalForm = document.getElementById("modal-form");
-        if (!modalForm) {
-            var modalForm = document.getElementById("modal-form-patch");
-        }
-        console.log(modalForm);
-        modalContent.removeChild(modalForm);
-        modal.style.display = "none";
+        closeModal()
     }
 
     addButton.onclick = function() {
@@ -178,10 +172,23 @@ function listenForPatch() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(jsonData),
-        });
+        })
+        .then(response => response.json())
+        .then(() => {
+            window.location.reload();
+        })
     });
 }
 
+function closeModal() {
+    var modalForm = document.getElementById("modal-form");
+    if (!modalForm) {
+        var modalForm = document.getElementById("modal-form-patch");
+    }
+    modalContent.removeChild(modalForm);
+    modal.style.display = "none";
+}
+ 
 window.onload = function() {
     getCompanyData()
 }
