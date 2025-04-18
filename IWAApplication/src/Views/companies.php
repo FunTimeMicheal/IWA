@@ -31,8 +31,11 @@
         <table>
             <tbody id="tablebody">
                 <tr>
-                    <th>Company ID</th>
                     <th>Company Name</th>
+                    <th>Company Address</th>
+                    <th>Company Zip Code</th>
+                    <th>Company Email</th>
+                    <th>Company Location ID</th>
                 </tr>
             </tbody>
         </table>
@@ -109,8 +112,11 @@
             const dataElement = Object.assign(document.createElement('tr'), {
                 class: 'data-item', 
                 innerHTML: /* html */`
-                    <td>${json[item].id}</td>
                     <td>${json[item].name}</td>
+                    <td>${json[item].street} ${json[item].number}${json[item].nummer_additional}</td>
+                    <td>${json[item].zip_code}</td>
+                    <td>${json[item].email}</td>
+                    <td>${json[item].location}</td>
               `,
             });
 
