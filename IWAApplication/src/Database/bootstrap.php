@@ -3,7 +3,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
-require_once "vendor/autoload.php";
+require_once __DIR__ ."/../../vendor/autoload.php";
 
 $config = ORMSetup::createAttributeMetadataConfiguration(
     paths: [getcwd() . '/src/Database/Entities'],
@@ -12,7 +12,7 @@ $config = ORMSetup::createAttributeMetadataConfiguration(
 
 $connection = DriverManager::getConnection([
     'driver' => 'pdo_sqlite',
-    'path' => getcwd() . '/db.sqlite',
+    'path' => __DIR__ . '/../../db.sqlite',
 ], $config);
 
 // obtaining the entity manager

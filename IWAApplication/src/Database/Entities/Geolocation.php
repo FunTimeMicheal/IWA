@@ -40,7 +40,7 @@ class Geolocation {
     #[ORM\Column(type: 'string')]
     private string $longitude;
 
-    public function __construct(string $name, string $type, Geolocation $parent, $longitude, float $latitude) {
+    public function __construct(string $name, string $type, Geolocation $parent, float $longitude, float $latitude) {
         $this->name = $name;
         $this->type = $type;
         $this->parent = $parent;
