@@ -3,3 +3,6 @@ Run `composer update-db` to update the database schema, or `composer force-db` t
 
 ## Testing the application
 Run `composer test` to test the application.
+
+## Changes
+- CRUD functionaliteit voor de front-end
