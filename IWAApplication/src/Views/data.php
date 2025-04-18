@@ -70,7 +70,7 @@
         const json = await response.json().catch(() => {});
         console.log(json)
 
-        for (const item of json) {
+        for (const item in json) {
             const dataElement = Object.assign(document.createElement('tr'), {
                 innerHTML: /* html */`
                     <td>${item.temperature}</td>

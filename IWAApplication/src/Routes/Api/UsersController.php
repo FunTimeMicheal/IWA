@@ -32,23 +32,25 @@ class UsersController {
 
         $group->post("/", function (Request $request, Response $response) use ($entityManager) {
             $data = $request->getParsedBody();
-            $data["nearest_location"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
+            $data["userrole"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
 
             $station = User::fromArray($data);
             $entityManager->persist($station);
             $entityManager->flush();
 
             $response->getBody()->write(json_encode($station));
-            return $response->withHeader("Content-Type", "application/json");
+            return $response->withHeader("Content-Type", "application/json")
+            ->withAddedHeader('Location', '/users')->withStatus(302);
         });
 
 
         $group->patch("/{id}", function (Request $request, Response $response, array $args) use ($entityManager) {
             $data = $request->getParsedBody();
-            $data["nearest_location"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
+            $data["userrole"] = $entityManager->getRepository(UserRole::class)->find($data["userrole"]);
 
             $station = $entityManager->getRepository(User::class)->find($args["id"]);
             $station->patch($data);
+            $entityManager->flush();
 
             $response->getBody()->write(json_encode($station));
             return $response->withHeader("Content-Type", "application/json");

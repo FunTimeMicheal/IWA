@@ -33,10 +33,13 @@ class UserRole implements JsonSerializable  {
         $this->users = new ArrayCollection();
     }
 
-    public function jsonSerialize() {
+    public function getId(): int {
+        return $this->id;
+    }
+
+    public function jsonSerialize():mixed {
         $data = get_object_vars($this);
         unset($data["users"]);
         return $data;
     }
-
 }

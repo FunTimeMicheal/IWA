@@ -44,7 +44,7 @@ class Company implements JsonSerializable {
     #[ORM\Column(type:'string')]
     private string $email;
 
-    public function __construct(string $name, string $street, int $number, string $nummer_additional, string $zip_code, string $email) {
+    public function __construct(?string $name, ?string $street, ?int $number, ?string $nummer_additional, string $zip_code, string $email) {
         $this->name  = $name;
         $this->street  = $street;
         $this->number  = $number;
@@ -54,9 +54,13 @@ class Company implements JsonSerializable {
         $this->relations = new ArrayCollection();
     }
 
-    public function jsonSerialize() {
+    public function setName(string $name) {
+        $this->name = $name;
+    }
+
+    public function jsonSerialize():mixed {
         $data = get_object_vars($this);
-        $data["location"] = $data["location"]["id"];
+        $data["location"] = $data["location"]?->getId();
         unset($data["relations"]);
         return $data;
     }

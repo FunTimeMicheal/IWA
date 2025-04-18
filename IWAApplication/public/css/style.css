@@ -23,7 +23,7 @@ label {
   outline: none;
 }
 
-input[type=button],
+input[type=button],input[type=submit],
 a.button {
   display: block;
   text-decoration: none;
@@ -36,7 +36,7 @@ a.button {
   height: fit-content;
   transition: border-color .15s;
 }
-input[type=button]:hover,
+input[type=button]:hover,input[type=submit]:hover,
 a.button:hover {
   border-color: var(--red);
 }
@@ -351,5 +351,45 @@ header a {
   .header {
     display: flex;
     gap: 8px;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--blue);
+  -webkit-box-shadow: 10px 10px 89px 32px rgba(0,0,0,0.24);
+  -moz-box-shadow: 10px 10px 89px 32px rgba(0,0,0,0.24);
+  box-shadow: 10px 10px 89px 32px rgba(0,0,0,0.24);
+
+  .modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+
+    form {
+      padding-top: 10px;
+
+      .button {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
 }
