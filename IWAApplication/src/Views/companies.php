@@ -77,16 +77,16 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="name"><br>
 
-            <label for="street">Straatnaam:</label>
+            <label for="street">Street name:</label>
             <input type="text" id="street" name="street"><br>
 
-            <label for="number">Huisnummer:</label>
+            <label for="number">House number:</label>
             <input type="text" id="number" name="number"><br>
 
-            <label for="nummer_additional">Toevoeging:</label>
+            <label for="nummer_additional">Number additional:</label>
             <input type="text" id="nummer_additional" name="nummer_additional"><br>
 
-            <label for="zip_code">Postcode:</label>
+            <label for="zip_code">Zip Code:</label>
             <input type="text" id="zip_code" name="zip_code"><br>
 
             <label for="email">Email:</label>
@@ -120,8 +120,6 @@
               `,
             });
 
-
-
             dataElement.onclick = () => {
                 modal.style.display = "block";
 
@@ -131,26 +129,26 @@
 
                 <input type="hidden" id="id" name="id" value="${json[item].id}"><br>
 
-                <label for="location">Location ID:</label>
-                <input type="text" id="location" name="location" value="${json[item].location}"><br>
-
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" value="${json[item].name}"><br>
+
+                <label for="street">Street name:</label>
+                <input type="text" id="street" name="street" value="${json[item].street}"><br>
+
+                <label for="number">House number:</label>
+                <input type="text" id="number" name="number" value="${json[item].number}"><br>
+
+                <label for="nummer_additional">Number additional:</label>
+                <input type="text" id="nummer_additional" name="nummer_additional" value="${json[item].nummer_additional}"><br>
+
+                <label for="zip_code">Zip Code:</label>
+                <input type="text" id="zip_code" name="zip_code" value="${json[item].zip_code}"><br>
 
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" value="${json[item].email}"><br>
 
-                <label for="number">Huisnummer:</label>
-                <input type="text" id="number" name="number" value="${json[item].number}"><br>
-
-                <label for="additional">Toevoeging:</label>
-                <input type="text" id="additional" name="additional" value="${json[item].number_additional}"><br>
-
-                <label for="street">Straatnaam:</label>
-                <input type="text" id="street" name="street" value="${json[item].street}"><br>
-
-                <label for="zip_code">Postcode:</label>
-                <input type="text" id="zip_code" name="zip_code" value="${json[item].zip_code}"><br>
+                <label for="location">Location ID:</label>
+                <input type="text" id="location" name="location" value="${json[item].location}"><br>
 
                 <input class="button" type="submit" value="Submit changes">
               `,
@@ -174,7 +172,7 @@ function listenForPatch() {
         const formData = new FormData(this);
         const jsonData = Object.fromEntries(formData.entries());
 
-        fetch(`api/companies/${jsonData.id}/`, {
+        fetch(`api/companies/${jsonData.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
