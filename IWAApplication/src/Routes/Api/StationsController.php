@@ -49,6 +49,7 @@ class StationsController {
       
       $station = $entityManager->getRepository(Station::class)->find($args["id"]);
       $station->patch($data);
+      $entityManager->flush();
       
       $response->getBody()->write(json_encode($station));
       return $response->withHeader("Content-Type", "application/json");

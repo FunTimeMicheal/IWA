@@ -45,6 +45,7 @@ class UserRolesController {
 
             $station = $entityManager->getRepository(UserRole::class)->find($args["id"]);
             $station->patch($data);
+            $entityManager->flush();
 
             $response->getBody()->write(json_encode($station));
             return $response->withHeader("Content-Type", "application/json");
