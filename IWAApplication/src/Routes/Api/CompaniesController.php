@@ -39,7 +39,8 @@ class CompaniesController {
           $entityManager->flush();
 
           $response->getBody()->write(json_encode($station));
-          return $response->withHeader("Content-Type", "application/json");
+          return $response->withHeader("Content-Type", "application/json")
+          ->withAddedHeader('Location','/companies')->withStatus(302);
       });
 
 

@@ -39,7 +39,8 @@ class UsersController {
             $entityManager->flush();
 
             $response->getBody()->write(json_encode($station));
-            return $response->withHeader("Content-Type", "application/json");
+            return $response->withHeader("Content-Type", "application/json")
+            ->withAddedHeader('Location', '/users')->withStatus(302);
         });
 
 
